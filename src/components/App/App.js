@@ -4,38 +4,6 @@ import Results from '../Results/Results';
 import Spotify from '../../util/Spotify';
 import Sheets from '../../util/Sheets';
 
-const cancelledList = [
-  {
-    name: 'Rex Orange County',
-    reason: 'Bad guy',
-    src: 'https://google.com/',
-    uri: 'spotify:artist:7pbDxGE6nQSZVfiFdq9lOL'
-  },
-  {
-    name: 'Kiss',
-    reason: 'Evil stuff',
-    src: 'https://wikipedia.org/',
-    uri: 'spotify:artist:07XSN3sPlIlB2L2XNcTwJw'
-  },
-  {
-    name: 'Guns N\' Roses',
-    reason: 'He hit girlfriend',
-    src: 'https://badguys.com',
-    uri: 'spotify:artist:3qm84nBOXUEQ2vnTfUTTFC'
-  }
-];
-
-const userList = [
-  {
-    name: 'Kiss',
-    uri: 'spotify:artist:07XSN3sPlIlB2L2XNcTwJw'
-  },
-  {
-    name: 'Rex Orange County',
-    uri: 'spotify:artist:7pbDxGE6nQSZVfiFdq9lOL'
-  }
-]
-
 function App() {
   const [timeRange, setTimeRange] = useState('medium_term');
   const [userArtists, setUserArtists] = useState([]);
@@ -47,24 +15,28 @@ function App() {
   }
 
   useEffect(() => {
+    getArtists()
+ }, [timeRange]);
+
+  const getArtists = async () => {
+    Spotify.getArtists(timeRange)
+    .then(a => setUserArtists(a));
+    Sheets.getArtists()
+    .then(c => setCancelledArtists(c));
+    compareArtists().then(combo => setUserCancelled(combo));
+  }
+
+  const compareArtists = async () => {
     let combinedList = [];
-    cancelledList.map(artist => {
-      for(let i = 0; i < userList.length; i++) {
-          if(userList[i].uri === artist.uri) {
-            combinedList.push(artist);
+    userArtists.map(artist => {
+      for(let i = 0; i < cancelledArtists.length; i++) {
+          if(cancelledArtists[i].uri === artist.uri) {
+            combinedList.push(cancelledArtists[i]);
             return artist;
           }
       }
     });
-    getArtists();
-    setUserCancelled(combinedList);
- }, [timeRange]);
-
-  const getArtists = async () => {
-    const a = await Spotify.getArtists(timeRange);
-    setUserArtists(a);
-    const c = await Sheets.getArtists();
-    setCancelledArtists(c);
+    return combinedList;
   }
 
   return (
@@ -76,7 +48,7 @@ function App() {
         <option value="medium_term" selected>6 Months</option>
         <option value="long_term">All Time</option>
       </select>
-      <Results artistList={userArtists} />
+      <Results artistList={userCancelled} />
     </div>
   );
 }

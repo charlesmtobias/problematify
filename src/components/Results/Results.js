@@ -5,6 +5,7 @@ const Results = (props) => {
     return (
         <div>
             <h2>Results</h2>
+            <p>{`You have a ${props.artistList.length * 2}% problematic rating`}</p>
             <ArtistList artists={props.artistList} />
         </div>
     );
