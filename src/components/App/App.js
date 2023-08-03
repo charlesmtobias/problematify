@@ -1,8 +1,8 @@
-import logo from '../../logo.svg'
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Results from '../Results/Results';
 import Spotify from '../../util/Spotify';
+import Sheets from '../../util/Sheets';
 
 const cancelledList = [
   {
@@ -63,6 +63,8 @@ function App() {
   const getArtists = async () => {
     const a = await Spotify.getArtists(timeRange);
     setUserArtists(a);
+    const c = await Sheets.getArtists();
+    setCancelledArtists(c);
   }
 
   return (
