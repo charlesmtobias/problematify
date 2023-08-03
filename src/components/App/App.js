@@ -2,6 +2,7 @@ import logo from '../../logo.svg'
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Results from '../Results/Results';
+import Spotify from '../../util/Spotify';
 
 const cancelledList = [
   {
@@ -38,6 +39,7 @@ const userList = [
 function App() {
   const [timeRange, setTimeRange] = useState('medium_term');
   const [userArtists, setUserArtists] = useState([]);
+  const [cancelledArtists, setCancelledArtists] = useState([]);
   const [userCancelled, setUserCancelled] = useState([]);
 
   const handleRangeChange = (event) => {
@@ -54,9 +56,14 @@ function App() {
           }
       }
     });
-
+    getArtists();
     setUserCancelled(combinedList);
- }, []);
+ }, [timeRange]);
+
+  const getArtists = async () => {
+    const a = await Spotify.getArtists(timeRange);
+    setUserArtists(a);
+  }
 
   return (
     <div className="App">
@@ -67,7 +74,7 @@ function App() {
         <option value="medium_term" selected>6 Months</option>
         <option value="long_term">All Time</option>
       </select>
-      <Results artistList={userCancelled} />
+      <Results artistList={userArtists} />
     </div>
   );
 }
