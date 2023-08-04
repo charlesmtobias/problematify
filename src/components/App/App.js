@@ -15,40 +15,34 @@ function App() {
   }
 
   useEffect(() => {
-    getArtists()
+    getArtists();
+    compareArtists();
  }, [timeRange]);
 
   const getArtists = async () => {
-    Spotify.getArtists(timeRange)
-    .then(a => setUserArtists(a));
     Sheets.getArtists()
-    .then(c => setCancelledArtists(c));
-    compareArtists().then(combo => setUserCancelled(combo));
+    .then(a => setCancelledArtists(a));
+    Spotify.getArtists(timeRange)
+    .then((b) => setUserArtists(b));
   }
 
-  const compareArtists = async () => {
+  const compareArtists = () => {
     let combinedList = [];
     userArtists.map(artist => {
       for(let i = 0; i < cancelledArtists.length; i++) {
           if(cancelledArtists[i].uri === artist.uri) {
-            combinedList.push(cancelledArtists[i]);
+            combinedList.push({ ...cancelledArtists[i], src: artist.url});
             return artist;
           }
       }
-    });
-    return combinedList;
+    })
+    setUserCancelled(combinedList);
   }
 
   return (
     <div className="App">
       <h1>Problematify</h1>
-      <p>Time Range:</p>
-      <select onChange={handleRangeChange} >
-        <option value="short_term">1 Month</option>
-        <option value="medium_term" selected>6 Months</option>
-        <option value="long_term">All Time</option>
-      </select>
-      <Results artistList={userCancelled} />
+      <Results artistList={userCancelled} rangeChange={handleRangeChange} />
     </div>
   );
 }

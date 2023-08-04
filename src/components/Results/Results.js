@@ -1,12 +1,18 @@
 import React from 'react';
+import './Results.css';
 import ArtistList from '../ArtistList/ArtistList'
 
 const Results = (props) => {
     return (
-        <div>
-            <h2>Results</h2>
-            <p>{`You have a ${props.artistList.length * 2}% problematic rating`}</p>
-            <ArtistList artists={props.artistList} />
+        <div class="results">
+            <span className="percentage">You have a <span className="green">{props.artistList.length * 2}%</span> problematic rating in the last 
+      <select onChange={props.rangeChange} >
+        <option value="short_term">1 Month</option>
+        <option value="medium_term" selected>6 Months</option>
+        <option value="long_term">All Time</option>
+      </select></span>
+            <div id="bar"><div id="amount" style={{clipPath: `inset(0 ${100-(props.artistList.length * 2)}% 0 0)`}}></div></div>
+            <ArtistList className="artistList" artists={props.artistList} />
         </div>
     );
 }

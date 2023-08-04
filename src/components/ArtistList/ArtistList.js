@@ -1,12 +1,14 @@
 import React from 'react';
 import Artist from '../Artist/Artist';
+import './ArtistList.css';
 
 const ArtistList = (props) => {
     return (
-        <div>
-            {props.artists.map(artist => {
+        <div className="artistList">
+            <h2>Top Artists</h2>
+            {props.artists.map((artist, i) => {
                 return (
-                    <Artist name={artist.name} reason={artist.reason} src={artist.src} />
+                        <Artist name={artist.name} reason={artist.reason} link={artist.link} src={artist.src} index={i} />
                 )
             })}
         </div>

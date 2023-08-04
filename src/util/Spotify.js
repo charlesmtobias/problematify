@@ -37,7 +37,8 @@ const Spotify = {
       return jsonResponse.items.map(artist => ({
         id: artist.id,
         name: artist.name,
-        uri: artist.uri
+        uri: artist.uri,
+        url: artist.images[0].url
       }))
     })
   }
