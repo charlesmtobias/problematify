@@ -1,5 +1,5 @@
 const clientId = '8718a9b8d22c4ae5990b8d471f7a29af'; // Insert client ID here.
-const redirectUri = 'http://problematify.netlify.com/'; // Have to add this to your accepted Spotify redirect URIs on the Spotify API.
+const redirectUri = 'http://problematify.netlify.com'; // Have to add this to your accepted Spotify redirect URIs on the Spotify API.
 let accessToken;
 
 const Spotify = {
@@ -24,7 +24,7 @@ const Spotify = {
 
   async getArtists(time_range) {
     const accessToken = Spotify.getAccessToken();
-    return await fetch(`https://api.spotify.com/v1/me/top/artists?time_range=${time_range}&limit=50`, {
+    return fetch(`https://api.spotify.com/v1/me/top/artists?time_range=${time_range}&limit=50`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }

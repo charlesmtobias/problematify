@@ -6,7 +6,7 @@ const url = `${base}&sheet=${sheetName}&tq=${query}`;
 
 const Sheets = {
     async getArtists() {
-        return await fetch(url)
+        return fetch(url)
         .then(response => {
           return response.text();
         })
