@@ -19,34 +19,25 @@ function App() {
   }, [])
 
   useEffect(() => {
-    getUserArtists();
+    Spotify.getArtists(timeRange)
+    .then((b) => setUserArtists(b));
  }, [timeRange]);
 
   useEffect(() => {
-    compareArtists();
-  }, [userArtists])
-
-  const getUserArtists = () => {
-    Spotify.getArtists(timeRange)
-    .then((b) => setUserArtists(b));
-  }
-
-const getCancelledArtists = () => {
-  Sheets.getArtists()
-  .then(a => setCancelledArtists(a));
-}
-
-  const compareArtists = () => {
     let combinedList = [];
-    userArtists.map(artist => {
+    userArtists.forEach(artist => {
       for(let i = 0; i < cancelledArtists.length; i++) {
           if(cancelledArtists[i].uri === artist.uri) {
-            combinedList.push({ ...cancelledArtists[i], src: artist.url});
-            return artist;
+            combinedList.push({ ...cancelledArtists[i], src: artist.url, id: artist.id});
           }
       }
     })
     setUserCancelled(combinedList);
+  }, [userArtists, cancelledArtists])
+
+  const getCancelledArtists = () => {
+    Sheets.getArtists()
+    .then(a => setCancelledArtists(a));
   }
 
   return (

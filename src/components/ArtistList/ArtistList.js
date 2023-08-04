@@ -8,7 +8,7 @@ const ArtistList = (props) => {
             <h2>Top Artists</h2>
             {props.artists.map((artist, i) => {
                 return (
-                        <Artist name={artist.name} reason={artist.reason} link={artist.link} src={artist.src} index={i} />
+                        <Artist key={artist.id} name={artist.name} reason={artist.reason} link={artist.link} src={artist.src} index={i} />
                 )
             })}
         </div>

@@ -4,11 +4,11 @@ import ArtistList from '../ArtistList/ArtistList'
 
 const Results = (props) => {
     return (
-        <div class="results">
+        <div className="results">
             <span className="percentage">You have a <span className="green">{props.artistList.length * 2}%</span> problematic rating in the last 
-      <select onChange={props.rangeChange} >
+      <select onChange={props.rangeChange} defaultValue={'medium_term'} >
         <option value="short_term">1 Month</option>
-        <option value="medium_term" selected>6 Months</option>
+        <option value="medium_term">6 Months</option>
         <option value="long_term">All Time</option>
       </select></span>
             <div id="bar"><div id="amount" style={{clipPath: `inset(0 ${100-(props.artistList.length * 2)}% 0 0)`}}></div></div>
