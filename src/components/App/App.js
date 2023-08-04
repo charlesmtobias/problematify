@@ -15,16 +15,26 @@ function App() {
   }
 
   useEffect(() => {
-    getArtists();
-    compareArtists();
+    getCancelledArtists();
+  }, [])
+
+  useEffect(() => {
+    getUserArtists();
  }, [timeRange]);
 
-  const getArtists = async () => {
-    Sheets.getArtists()
-    .then(a => setCancelledArtists(a));
+  useEffect(() => {
+    compareArtists();
+  }, [userArtists])
+
+  const getUserArtists = () => {
     Spotify.getArtists(timeRange)
     .then((b) => setUserArtists(b));
   }
+
+const getCancelledArtists = () => {
+  Sheets.getArtists()
+  .then(a => setCancelledArtists(a));
+}
 
   const compareArtists = () => {
     let combinedList = [];
