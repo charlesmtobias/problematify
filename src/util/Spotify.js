@@ -22,7 +22,7 @@ const Spotify = {
     }
   },
 
-  async getArtists(time_range) {
+  getArtists(time_range) {
     const accessToken = Spotify.getAccessToken();
     return fetch(`https://api.spotify.com/v1/me/top/artists?time_range=${time_range}&limit=50`, {
       headers: {

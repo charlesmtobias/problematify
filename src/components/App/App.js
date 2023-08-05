@@ -10,6 +10,7 @@ function App() {
   const [cancelledArtists, setCancelledArtists] = useState([]);
   const [userCancelled, setUserCancelled] = useState([]);
   const [percentage, setPercentage] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const handleRangeChange = (event) => {
     setTimeRange(event.target.value);
@@ -17,6 +18,7 @@ function App() {
 
   useEffect(() => {
     getCancelledArtists();
+    setTimeout(() => setLoading(false), 1000)
   }, [])
 
   useEffect(() => {
@@ -38,7 +40,6 @@ function App() {
     })
     setUserCancelled(combinedList);
     setPercentage(Math.ceil((score / (userArtists.length * (userArtists.length+1)/2)) * 100));
-
   }, [userArtists, cancelledArtists])
 
   const getCancelledArtists = () => {
@@ -49,7 +50,10 @@ function App() {
   return (
     <div className="App">
       <h1>Problematify</h1>
-      <Results percentage={percentage} artistList={userCancelled} rangeChange={handleRangeChange} />
+      {loading ? 
+      (<div className="loading-bar"><div className="amount"></div></div>) :
+      (<Results percentage={percentage} artistList={userCancelled} rangeChange={handleRangeChange} />)
+      }
     </div>
   );
 }

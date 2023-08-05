@@ -5,3 +5,42 @@
 h1 {
   font-family: 'Montserrat', sans-serif;
 }
+
+button.loginButton {
+  background-color: #1DB954;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+}
+
+button.loginButton:hover {
+  opacity: 0.8;
+}
+
+.loading-bar {
+  max-width: 500px;
+  background-color: #181818;
+  height: 14px;
+  margin: 8px auto;
+  border-radius: 8px;
+}
+
+.amount {
+  height: 14px;
+  background-color: #1db954;
+  border-radius: 8px;
+}
+
+.loading-bar div {
+  animation: amount 1s ease forwards;
+}
+
+
+@keyframes amount {
+  from { width: 0%; }
+  to { width: 100%; }
+}
