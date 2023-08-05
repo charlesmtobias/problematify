@@ -3,9 +3,11 @@ import './Results.css';
 import ArtistList from '../ArtistList/ArtistList'
 
 const Results = (props) => {
+    const aAn = (String(props.percentage)[0] ==="8") ? "an":"a";
+
     return (
         <div className="results">
-            <span className="percentage">You have a <span className="green">{props.percentage}%</span> problematic rating in the last 
+            <span className="percentage">You have {aAn} <span className="green">{props.percentage}%</span> problematic rating in the last 
       <select onChange={props.rangeChange} defaultValue={'medium_term'} >
         <option value="short_term">1 Month</option>
         <option value="medium_term">6 Months</option>
