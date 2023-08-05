@@ -52,8 +52,17 @@ function App() {
       <h1>Problematify</h1>
       {loading ? 
       (<div className="loading-bar"><div className="amount"></div></div>) :
-      (<Results percentage={percentage} artistList={userCancelled} rangeChange={handleRangeChange} />)
+      (
+        <>
+        <Results percentage={percentage} artistList={userCancelled} rangeChange={handleRangeChange} />
+        {/*<button className="download">Download Image</button>*/}
+        </>
+      )
       }
+      <footer>
+        <p>By <a href="https://chucktoby.com" target='_blank' rel='noreferrer'>Charles Tobias</a></p>
+        <p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdqTuPBCHitOCMzqLhcAcUC82joia27hzlFRWwjl-G1qp1kNg/viewform?usp=sf_link" target='_blank' rel='noreferrer'>Submit problematic artists here</a></p>
+      </footer>
     </div>
   );
 }

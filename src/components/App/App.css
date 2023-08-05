@@ -44,3 +44,21 @@ button.loginButton:hover {
   from { width: 0%; }
   to { width: 100%; }
 }
+
+footer a {
+  color: white;
+}
+
+.download {
+  position: sticky;
+  bottom: 16px;
+  background-color: #1DB954;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+  margin-top: 8px;
+}
