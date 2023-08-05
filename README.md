@@ -2,7 +2,7 @@
 
 Problematify is a Spotify analyzing app that compares the users most listened to artists to a list of artists that have been deemed problematic and displays the matching artists along with the reason they are considered problematic. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![IMG_3352](https://github.com/charlesmtobias/problematify/assets/140647447/d1afaf1d-a15d-415b-9584-3dec7e901a16)
+![problematifyScreenshot](https://github.com/charlesmtobias/problematify/assets/140647447/71c5f8c1-774b-42b2-9d3c-27bd21c8b688)
 
 ## Future additions
 I would like to create a way to download an image version of the results that can be easily shared to social media.
